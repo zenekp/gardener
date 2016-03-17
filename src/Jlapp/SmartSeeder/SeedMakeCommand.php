@@ -37,7 +37,7 @@ class SeedMakeCommand extends Command {
         $model = ucfirst($this->argument('model'));
         $path = $this->option('path');
         if (empty($path)) {
-            $path = database_path(config('smart-seeder.dir'));
+            $path = database_path(config('gardener.dir'));
         }
         else {
             $path = base_path($path);

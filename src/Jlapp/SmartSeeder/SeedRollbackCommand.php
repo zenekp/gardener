@@ -52,7 +52,7 @@ class SeedRollbackCommand extends Command {
 
         $env = $this->option('env');
 
-        if (File::exists(database_path(config('smart-seeder.seedsDir')))) {
+        if (File::exists(database_path(config('gardener.seedsDir')))) {
             $this->migrator->setEnv($env);
         }
 

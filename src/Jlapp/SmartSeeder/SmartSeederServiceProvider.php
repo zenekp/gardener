@@ -15,7 +15,7 @@ class SmartSeederServiceProvider extends ServiceProvider {
     public function boot() {
 
         $this->publishes([
-            __DIR__.'/../../config/smart-seeder.php' => config_path('smart-seeder.php'),
+            __DIR__.'/../../config/gardener.php' => config_path('gardener.php'),
         ]);
     }
 
@@ -27,11 +27,11 @@ class SmartSeederServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../../config/smart-seeder.php', 'smart-seeder'
+            __DIR__.'/../../config/gardener.php', 'gardener'
         );
 
         $this->app->singleton('seed.repository', function($app) {
-            return new SmartSeederRepository($app['db'], config('smart-seeder.table'));
+            return new SmartSeederRepository($app['db'], config('gardener.table'));
         });
 
         $this->app->singleton('seed.migrator', function($app)
