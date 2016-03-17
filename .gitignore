@@ -1,7 +1,13 @@
-vendor
-composer.phar
-composer.lock
+# Crap
 .DS_Store
-.idea
 bin
 coverage
+
+# Composer
+composer.phar
+composer.lock
+vendor
+
+# IDE
+.idea
+*.sublime-*
