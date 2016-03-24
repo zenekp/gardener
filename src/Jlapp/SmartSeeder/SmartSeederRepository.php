@@ -67,6 +67,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function getRan()
     {
         $env = $this->env;
+
         if (empty($env)) {
             $env = App::environment();
         }
@@ -82,6 +83,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function getLast()
     {
         $env = $this->env;
+
         if (empty($env)) {
             $env = App::environment();
         }
@@ -101,9 +103,11 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function log($file, $batch)
     {
         $env = $this->env;
+
         if (empty($env)) {
             $env = App::environment();
         }
+
         $record = ['seed' => $file, 'env' => $env, 'batch' => $batch];
 
         $this->table()->insert($record);
@@ -119,9 +123,11 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function delete($seed)
     {
         $env = $this->env;
+
         if (empty($env)) {
             $env = App::environment();
         }
+
         $this->table()->where('env', '=', $env)->where('seed', $seed->seed)->delete();
     }
 
@@ -143,6 +149,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function getLastBatchNumber()
     {
         $env = $this->env;
+
         if (empty($env)) {
             $env = App::environment();
         }
@@ -165,7 +172,6 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             // table to hold the migration file's path as well as the batch ID.
             $table->string('seed');
             $table->string('env');
-
             $table->integer('batch');
         });
     }

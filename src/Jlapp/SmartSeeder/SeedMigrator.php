@@ -22,13 +22,16 @@ class SeedMigrator extends Migrator
      * @param  \Illuminate\Filesystem\Filesystem                            $files
      * @return void
      */
-    public function __construct(SmartSeederRepository $repository,
-                                Resolver $resolver,
-                                Filesystem $files)
+    public function __construct(SmartSeederRepository $repository, Resolver $resolver, Filesystem $files)
     {
         parent::__construct($repository, $resolver, $files);
     }
 
+    /**
+     * Set env.
+     *
+     * @param string $env
+     */
     public function setEnv($env)
     {
         $this->repository->setEnv($env);
@@ -43,9 +46,11 @@ class SeedMigrator extends Migrator
     public function getMigrationFiles($path)
     {
         $files = [];
+
         if (! empty($this->repository->env)) {
             $files = array_merge($files, $this->files->glob("$path/{$this->repository->env}/*.php"));
         }
+
         $files = array_merge($files, $this->files->glob($path.'/*.php'));
 
         // Once we have the array of files in the directory we will just remove the
@@ -57,7 +62,6 @@ class SeedMigrator extends Migrator
 
         $files = array_map(function ($file) {
             return str_replace('.php', '', basename($file));
-
         }, $files);
 
         // Once we have all of the formatted file names we will sort them and since
@@ -78,9 +82,7 @@ class SeedMigrator extends Migrator
     public function runSingleFile($path, $pretend = false)
     {
         $this->notes = [];
-
         $file = str_replace('.php', '', basename($path));
-
         $files = [$file];
 
         // Once we grab all of the migration files for the path, we will compare them
@@ -89,12 +91,12 @@ class SeedMigrator extends Migrator
         $ran = $this->repository->getRan();
 
         $migrations = array_diff($files, $ran);
-
         $filename_ext = pathinfo($path, PATHINFO_EXTENSION);
 
         if (! $filename_ext) {
             $path .= '.php';
         }
+
         $this->files->requireOnce($path);
 
         $this->runMigrationList($migrations, $pretend);
@@ -171,6 +173,7 @@ class SeedMigrator extends Migrator
     public function resolve($file)
     {
         $filePath = database_path(config('seeds.dir').'/'.$file.'.php');
+        
         if (File::exists($filePath)) {
             require_once $filePath;
         } elseif (! empty($this->repository->env)) {

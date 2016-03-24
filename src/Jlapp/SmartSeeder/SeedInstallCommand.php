@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jordan
- * Date: 2014-11-07
- * Time: 1:46 PM.
- */
+
 namespace Jlapp\SmartSeeder;
 
 use Illuminate\Console\Command;
@@ -33,9 +28,15 @@ class SeedInstallCommand extends Command
      */
     protected $repository;
 
+    /**
+     * Constructor.
+     *
+     * @param SmartSeederRepository $repository
+     */
     public function __construct(SmartSeederRepository $repository)
     {
         parent::__construct();
+
         $this->repository = $repository;
     }
 

@@ -17,13 +17,18 @@ class SeedRollbackCommand extends Command
     use ConfirmableTrait;
 
     /**
+     * SeedMigrator.
+     *
+     * @var [type]
+     */
+    private $migrator;
+
+    /**
      * The console command name.
      *
      * @var string
      */
     protected $name = 'seed:rollback';
-
-    private $migrator;
 
     /**
      * The console command description.
@@ -32,9 +37,15 @@ class SeedRollbackCommand extends Command
      */
     protected $description = 'Rollback all database seeding';
 
+    /**
+     * Constructor.
+     *
+     * @param SeedMigrator $migrator
+     */
     public function __construct(SeedMigrator $migrator)
     {
         parent::__construct();
+
         $this->migrator = $migrator;
     }
 
@@ -49,15 +60,15 @@ class SeedRollbackCommand extends Command
             return;
         }
 
-        $this->migrator->setConnection($this->input->getOption('database'));
-
         $env = $this->option('env');
+        $pretend = $this->input->getOption('pretend');
+
+        $this->migrator->setConnection($this->input->getOption('database'));
 
         if (File::exists(database_path(config('seeds.dir')))) {
             $this->migrator->setEnv($env);
         }
 
-        $pretend = $this->input->getOption('pretend');
         $this->migrator->rollback($pretend);
 
         // Once the migrator has run we will grab the note output and send it out to
@@ -67,19 +78,6 @@ class SeedRollbackCommand extends Command
             $this->output->writeln($note);
         }
     }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    /*protected function getArguments()
-    {
-        return array(
-            array('from', InputArgument::REQUIRED, 'The from date in the format dd-mm-yyyy.'),
-            array('to', InputArgument::REQUIRED, 'The to date in the format dd-mm-yyyy.'),
-        );
-    }*/
 
     /**
      * Get the console command options.

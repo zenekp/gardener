@@ -13,6 +13,11 @@ class SeedOverrideCommand extends SeedCommand
      */
     protected $name = 'db:seed';
 
+    /**
+     * Constructor.
+     * 
+     * @param SeedMigrator $migrator [description]
+     */
     public function __construct(SeedMigrator $migrator)
     {
         parent::__construct($migrator);

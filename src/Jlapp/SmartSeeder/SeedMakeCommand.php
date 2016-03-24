@@ -36,13 +36,17 @@ class SeedMakeCommand extends Command
     {
         $model = ucfirst($this->argument('model'));
         $path = $this->option('path');
+        $env = $this->option('env');
+        $stub = File::get(__DIR__.'/stubs/DatabaseSeeder.stub');
+
+        // Check path
         if (empty($path)) {
             $path = database_path(config('seeds.dir'));
         } else {
             $path = base_path($path);
         }
 
-        $env = $this->option('env');
+        // Check env
         if (! empty($env)) {
             $path .= "/$env";
         }
@@ -50,18 +54,23 @@ class SeedMakeCommand extends Command
         if (! File::exists($path)) {
             File::makeDirectory($path, 0755, true);
         }
+
+        // File name
         $created = date('Y_m_d_His');
         $path .= "/seed_{$created}_{$model}Seeder.php";
 
-        $fs = File::get(__DIR__.'/stubs/DatabaseSeeder.stub');
-
+        // Content
         $namespace = rtrim($this->getAppNamespace(), '\\');
-        $stub = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $fs);
+        $stub = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $stub);
         $stub = str_replace('{{namespace}}', " namespace $namespace;", $stub);
         $stub = str_replace('{{class}}', $model, $stub);
+
+        // Create file
         File::put($path, $stub);
 
+        // Output message
         $message = "Seed created for $model";
+
         if (! empty($env)) {
             $message .= " in environment: $env";
         }

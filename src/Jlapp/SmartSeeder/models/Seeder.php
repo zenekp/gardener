@@ -10,6 +10,11 @@ class Seeder extends Eloquent
      */
     protected $table = 'seeds';
 
+    /**
+     * Fillable properties.
+     *
+     * @var [type]
+     */
     protected $fillable = [
         'seed',
         'env',

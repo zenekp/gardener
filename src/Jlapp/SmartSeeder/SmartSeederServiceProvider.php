@@ -14,6 +14,11 @@ class SmartSeederServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
+    /**
+     * Boot.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->publishes([

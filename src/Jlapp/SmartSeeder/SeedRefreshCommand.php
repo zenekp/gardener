@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jordan
- * Date: 2014-11-07
- * Time: 1:46 PM.
- */
+
 namespace Jlapp\SmartSeeder;
 
 use Illuminate\Console\Command;
@@ -14,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 class SeedRefreshCommand extends Command
 {
     use ConfirmableTrait;
+
     /**
      * The console command name.
      *
@@ -40,20 +36,22 @@ class SeedRefreshCommand extends Command
         }
 
         $env = $this->input->getOption('env');
-
         $database = $this->input->getOption('database');
-
         $force = $this->input->getOption('force');
 
         $this->call('seed:reset', [
-            '--database' => $database, '--force' => $force, '--env' => $env,
+            '--database' => $database,
+            '--force' => $force,
+            '--env' => $env,
         ]);
 
         // The refresh command is essentially just a brief aggregate of a few other of
         // the migration commands and just provides a convenient wrapper to execute
         // them in succession. We'll also see if we need to re-seed the database.
         $this->call('seed:run', [
-            '--database' => $database, '--force' => $force, '--env' => $env,
+            '--database' => $database,
+            '--force' => $force,
+            '--env' => $env,
         ]);
     }
 
@@ -66,9 +64,7 @@ class SeedRefreshCommand extends Command
     {
         return [
             ['env', null, InputOption::VALUE_OPTIONAL, 'The environment to use.'],
-
             ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
-
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
         ];
     }
