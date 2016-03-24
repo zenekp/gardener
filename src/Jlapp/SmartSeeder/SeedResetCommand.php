@@ -84,7 +84,7 @@ class SeedResetCommand extends Command
         $this->migrator->setConnection($this->input->getOption('database'));
 
         if (! $this->migrator->repositoryExists()) {
-            $options = array('--database' => $this->input->getOption('database'));
+            $options = ['--database' => $this->input->getOption('database')];
 
             $this->call('seed:install', $options);
         }
@@ -110,14 +110,14 @@ class SeedResetCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array('env', null, InputOption::VALUE_OPTIONAL, 'The environment in which to run the seeds.', null),
+        return [
+            ['env', null, InputOption::VALUE_OPTIONAL, 'The environment in which to run the seeds.', null],
 
-            array('database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'),
+            ['database', null, InputOption::VALUE_OPTIONAL, 'The database connection to use.'],
 
-            array('force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'),
+            ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when in production.'],
 
-            array('pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'),
-        );
+            ['pretend', null, InputOption::VALUE_NONE, 'Dump the SQL queries that would be run.'],
+        ];
     }
 }

@@ -16,9 +16,9 @@ class SmartSeederServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->publishes(array(
+        $this->publishes([
             __DIR__.'/../../config/seeds.php' => config_path('seeds.php'),
-        ));
+        ]);
     }
 
     /**
@@ -68,14 +68,14 @@ class SmartSeederServiceProvider extends ServiceProvider
             return new SeedRefreshCommand();
         });
 
-        $this->commands(array(
+        $this->commands([
             'seed.run',
             'seed.install',
             'seed.make',
             'seed.reset',
             'seed.rollback',
             'seed.refresh',
-        ));
+        ]);
     }
 
     /**
@@ -85,7 +85,7 @@ class SmartSeederServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array(
+        return [
             'seed.repository',
             'seed.migrator',
             'command.seed',
@@ -95,6 +95,6 @@ class SmartSeederServiceProvider extends ServiceProvider
             'seed.reset',
             'seed.rollback',
             'seed.refresh',
-        );
+        ];
     }
 }

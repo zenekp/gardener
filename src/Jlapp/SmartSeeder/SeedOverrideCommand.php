@@ -25,8 +25,8 @@ class SeedOverrideCommand extends SeedCommand
      */
     protected function getOptions()
     {
-        $options   = parent::getOptions();
-        $options[] = array('class', null, InputOption::VALUE_OPTIONAL, "There is no rootseeder in the SmartSeeder package, but we need this to override Laravel's behaviour.", null);
+        $options = parent::getOptions();
+        $options[] = ['class', null, InputOption::VALUE_OPTIONAL, "There is no rootseeder in the SmartSeeder package, but we need this to override Laravel's behaviour.", null];
 
         return $options;
     }

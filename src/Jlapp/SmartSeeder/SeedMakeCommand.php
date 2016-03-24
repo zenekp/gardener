@@ -35,7 +35,7 @@ class SeedMakeCommand extends Command
     public function fire()
     {
         $model = ucfirst($this->argument('model'));
-        $path  = $this->option('path');
+        $path = $this->option('path');
         if (empty($path)) {
             $path = database_path(config('seeds.dir'));
         } else {
@@ -56,9 +56,9 @@ class SeedMakeCommand extends Command
         $fs = File::get(__DIR__.'/stubs/DatabaseSeeder.stub');
 
         $namespace = rtrim($this->getAppNamespace(), '\\');
-        $stub      = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $fs);
-        $stub      = str_replace('{{namespace}}', " namespace $namespace;", $stub);
-        $stub      = str_replace('{{class}}', $model, $stub);
+        $stub = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $fs);
+        $stub = str_replace('{{namespace}}', " namespace $namespace;", $stub);
+        $stub = str_replace('{{class}}', $model, $stub);
         File::put($path, $stub);
 
         $message = "Seed created for $model";
@@ -76,9 +76,9 @@ class SeedMakeCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('model', InputArgument::REQUIRED, 'The name of the model you wish to seed.'),
-        );
+        return [
+            ['model', InputArgument::REQUIRED, 'The name of the model you wish to seed.'],
+        ];
     }
 
     /**
@@ -88,9 +88,9 @@ class SeedMakeCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array('env', null, InputOption::VALUE_OPTIONAL, 'The environment to seed to.', null),
-            array('path', null, InputOption::VALUE_OPTIONAL, 'The relative path to the base path to generate the seed to.', null),
-        );
+        return [
+            ['env', null, InputOption::VALUE_OPTIONAL, 'The environment to seed to.', null],
+            ['path', null, InputOption::VALUE_OPTIONAL, 'The relative path to the base path to generate the seed to.', null],
+        ];
     }
 }
