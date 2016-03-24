@@ -15,7 +15,7 @@ class SeedOverrideCommand extends SeedCommand
 
     /**
      * Constructor.
-     * 
+     *
      * @param SeedMigrator $migrator [description]
      */
     public function __construct(SeedMigrator $migrator)
