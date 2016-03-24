@@ -1,16 +1,16 @@
-<?php namespace Jlapp\SmartSeeder;
+<?php
 
+namespace Jlapp\SmartSeeder;
+
+use Config;
+use File;
 use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
-use File;
-use App;
-use Config;
-
-class SeedMakeCommand extends Command {
-
+class SeedMakeCommand extends Command
+{
     use AppNamespaceDetectorTrait;
 
     /**
@@ -35,35 +35,34 @@ class SeedMakeCommand extends Command {
     public function fire()
     {
         $model = ucfirst($this->argument('model'));
-        $path = $this->option('path');
+        $path  = $this->option('path');
         if (empty($path)) {
             $path = database_path(config('seeds.dir'));
-        }
-        else {
+        } else {
             $path = base_path($path);
         }
 
         $env = $this->option('env');
-        if (!empty($env)) {
+        if (! empty($env)) {
             $path .= "/$env";
         }
 
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             File::makeDirectory($path, 0755, true);
         }
         $created = date('Y_m_d_His');
         $path .= "/seed_{$created}_{$model}Seeder.php";
 
-        $fs = File::get(__DIR__."/stubs/DatabaseSeeder.stub");
+        $fs = File::get(__DIR__.'/stubs/DatabaseSeeder.stub');
 
-        $namespace = rtrim($this->getAppNamespace(), "\\");
-        $stub = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $fs);
-        $stub = str_replace('{{namespace}}', " namespace $namespace;", $stub);
-        $stub = str_replace('{{class}}', $model, $stub);
+        $namespace = rtrim($this->getAppNamespace(), '\\');
+        $stub      = str_replace('{{model}}', "seed_{$created}_".$model.'Seeder', $fs);
+        $stub      = str_replace('{{namespace}}', " namespace $namespace;", $stub);
+        $stub      = str_replace('{{class}}', $model, $stub);
         File::put($path, $stub);
 
         $message = "Seed created for $model";
-        if (!empty($env)) {
+        if (! empty($env)) {
             $message .= " in environment: $env";
         }
 

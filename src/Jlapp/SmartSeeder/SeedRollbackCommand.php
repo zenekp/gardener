@@ -3,19 +3,17 @@
  * Created by PhpStorm.
  * User: Jordan
  * Date: 2014-11-07
- * Time: 1:46 PM
+ * Time: 1:46 PM.
  */
-
 namespace Jlapp\SmartSeeder;
 
+use File;
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
 use Symfony\Component\Console\Input\InputOption;
 
-use File;
-
-class SeedRollbackCommand extends Command {
-
+class SeedRollbackCommand extends Command
+{
     use ConfirmableTrait;
 
     /**
@@ -34,11 +32,12 @@ class SeedRollbackCommand extends Command {
      */
     protected $description = 'Rollback all database seeding';
 
-
-    public function __construct(SeedMigrator $migrator) {
+    public function __construct(SeedMigrator $migrator)
+    {
         parent::__construct();
         $this->migrator = $migrator;
     }
+
     /**
      * Execute the console command.
      *
@@ -46,7 +45,9 @@ class SeedRollbackCommand extends Command {
      */
     public function fire()
     {
-        if ( ! $this->confirmToProceed()) return;
+        if (! $this->confirmToProceed()) {
+            return;
+        }
 
         $this->migrator->setConnection($this->input->getOption('database'));
 
@@ -62,8 +63,7 @@ class SeedRollbackCommand extends Command {
         // Once the migrator has run we will grab the note output and send it out to
         // the console screen, since the migrator itself functions without having
         // any instances of the OutputInterface contract passed into the class.
-        foreach ($this->migrator->getNotes() as $note)
-        {
+        foreach ($this->migrator->getNotes() as $note) {
             $this->output->writeln($note);
         }
     }

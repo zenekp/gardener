@@ -2,9 +2,8 @@
 
 namespace spec\Jlapp\SmartSeeder;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Illuminate\Database\ConnectionResolverInterface;
+use PhpSpec\ObjectBehavior;
 
 class SmartSeederRepositorySpec extends ObjectBehavior
 {
@@ -20,7 +19,7 @@ class SmartSeederRepositorySpec extends ObjectBehavior
     /** @var ConnectionResolverInterface */
     protected $resolver;
 
-    function let(ConnectionResolverInterface $resolver)
+    public function let(ConnectionResolverInterface $resolver)
     {
         $this->resolver = $resolver;
 
@@ -31,17 +30,17 @@ class SmartSeederRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Jlapp\SmartSeeder\SmartSeederRepository');
     }
 
-    function it_should_implement_interface()
+    public function it_should_implement_interface()
     {
         $this->beAnInstanceOf('Illuminate\Database\Migrations\MigrationRepositoryInterface');
     }
 
-    function it_should_provide_resolver()
+    public function it_should_provide_resolver()
     {
         $this->getConnectionResolver()->shouldBe($this->resolver);
     }
 
-    function it_should_get_connection_for_source()
+    public function it_should_get_connection_for_source()
     {
         $connection = microtime();
         $this->resolver->connection($this->source)->willReturn($connection);

@@ -3,16 +3,15 @@
  * Created by PhpStorm.
  * User: Jordan
  * Date: 2014-11-07
- * Time: 1:46 PM
+ * Time: 1:46 PM.
  */
-
 namespace Jlapp\SmartSeeder;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Support\Facades\App;
 
-class SeedInstallCommand extends Command {
+class SeedInstallCommand extends Command
+{
     /**
      * The console command name.
      *
@@ -34,11 +33,12 @@ class SeedInstallCommand extends Command {
      */
     protected $repository;
 
-
-    public function __construct(SmartSeederRepository $repository) {
+    public function __construct(SmartSeederRepository $repository)
+    {
         parent::__construct();
         $this->repository = $repository;
     }
+
     /**
      * Execute the console command.
      *
@@ -50,7 +50,7 @@ class SeedInstallCommand extends Command {
 
         $this->repository->createRepository();
 
-        $this->info("Seeds table created successfully.");
+        $this->info('Seeds table created successfully.');
     }
 
     /**
