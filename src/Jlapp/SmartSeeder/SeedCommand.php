@@ -94,7 +94,7 @@ class SeedCommand extends Command
 
         if (! $this->migrator->repositoryExists()) {
             $options = [
-                '--database' => $this->input->getOption('database')
+                '--database' => $this->input->getOption('database'),
             ];
 
             $this->call('seed:install', $options);

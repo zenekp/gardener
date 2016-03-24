@@ -173,7 +173,7 @@ class SeedMigrator extends Migrator
     public function resolve($file)
     {
         $filePath = database_path(config('seeds.dir').'/'.$file.'.php');
-        
+
         if (File::exists($filePath)) {
             require_once $filePath;
         } elseif (! empty($this->repository->env)) {
