@@ -2,15 +2,13 @@
 
 namespace Jlapp\SmartSeeder;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Console\ConfirmableTrait;
-
-use App;
 use File;
+use Illuminate\Console\Command;
+use Illuminate\Console\ConfirmableTrait;
+use Symfony\Component\Console\Input\InputOption;
 
-class SeedResetCommand extends Command {
-
+class SeedResetCommand extends Command
+{
     use ConfirmableTrait;
     /**
      * The console command name.
@@ -28,11 +26,12 @@ class SeedResetCommand extends Command {
      */
     protected $description = 'Resets all the seeds in the database';
 
-
-    public function __construct(SeedMigrator $migrator) {
+    public function __construct(SeedMigrator $migrator)
+    {
         parent::__construct();
         $this->migrator = $migrator;
     }
+
     /**
      * Execute the console command.
      *
@@ -40,7 +39,9 @@ class SeedResetCommand extends Command {
      */
     public function fire()
     {
-        if ( ! $this->confirmToProceed()) return;
+        if (! $this->confirmToProceed()) {
+            return;
+        }
 
         $this->prepareDatabase();
 
@@ -55,19 +56,19 @@ class SeedResetCommand extends Command {
 
         $pretend = $this->input->getOption('pretend');
 
-        while (true)
-        {
+        while (true) {
             $count = $this->migrator->rollback($pretend);
 
             // Once the migrator has run we will grab the note output and send it out to
             // the console screen, since the migrator itself functions without having
             // any instances of the OutputInterface contract passed into the class.
-            foreach ($this->migrator->getNotes() as $note)
-            {
+            foreach ($this->migrator->getNotes() as $note) {
                 $this->output->writeln($note);
             }
 
-            if ($count == 0) break;
+            if ($count == 0) {
+                break;
+            }
         }
 
         $this->line("Seeds reset for $env");
@@ -82,8 +83,7 @@ class SeedResetCommand extends Command {
     {
         $this->migrator->setConnection($this->input->getOption('database'));
 
-        if ( ! $this->migrator->repositoryExists())
-        {
+        if (! $this->migrator->repositoryExists()) {
             $options = array('--database' => $this->input->getOption('database'));
 
             $this->call('seed:install', $options);

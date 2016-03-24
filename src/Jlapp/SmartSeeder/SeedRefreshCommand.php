@@ -3,17 +3,16 @@
  * Created by PhpStorm.
  * User: Jordan
  * Date: 2014-11-07
- * Time: 1:46 PM
+ * Time: 1:46 PM.
  */
-
 namespace Jlapp\SmartSeeder;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Console\ConfirmableTrait;
+use Symfony\Component\Console\Input\InputOption;
 
-class SeedRefreshCommand extends Command {
-
+class SeedRefreshCommand extends Command
+{
     use ConfirmableTrait;
     /**
      * The console command name.
@@ -36,7 +35,9 @@ class SeedRefreshCommand extends Command {
      */
     public function fire()
     {
-        if ( ! $this->confirmToProceed()) return;
+        if (! $this->confirmToProceed()) {
+            return;
+        }
 
         $env = $this->input->getOption('env');
 

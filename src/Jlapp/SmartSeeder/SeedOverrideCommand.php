@@ -1,9 +1,11 @@
-<?php namespace Jlapp\SmartSeeder;
+<?php
+
+namespace Jlapp\SmartSeeder;
 
 use Symfony\Component\Console\Input\InputOption;
 
-class SeedOverrideCommand extends SeedCommand {
-
+class SeedOverrideCommand extends SeedCommand
+{
     /**
      * The console command name.
      *
@@ -11,7 +13,8 @@ class SeedOverrideCommand extends SeedCommand {
      */
     protected $name = 'db:seed';
 
-    public function __construct(SeedMigrator $migrator) {
+    public function __construct(SeedMigrator $migrator)
+    {
         parent::__construct($migrator);
     }
 
@@ -22,9 +25,9 @@ class SeedOverrideCommand extends SeedCommand {
      */
     protected function getOptions()
     {
-        $options = parent::getOptions();
+        $options   = parent::getOptions();
         $options[] = array('class', null, InputOption::VALUE_OPTIONAL, "There is no rootseeder in the SmartSeeder package, but we need this to override Laravel's behaviour.", null);
+
         return $options;
     }
-
 }
