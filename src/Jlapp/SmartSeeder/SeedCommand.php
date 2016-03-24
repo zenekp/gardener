@@ -44,18 +44,20 @@ class SeedCommand extends Command {
         // The pretend option can be used for "simulating" the migration and grabbing
         // the SQL queries that would fire if the migration were to be run against
         // a database for real, which is helpful for double checking migrations.
-        $pretend = $this->input->getOption('pretend');
+        $options = [
+            'pretend' => $this->input->getOption('pretend')
+        ];
 
-        $path = database_path(config('gardener.dir'));
+        $path = database_path(config('smart-seeds.dir'));
         $env = $this->option('env');
 
         $this->migrator->setEnv($env);
 
         $single = $this->option('file');
         if ($single) {
-            $this->migrator->runSingleFile("$path/$single", $pretend);
+            $this->migrator->runSingleFile("$path/$single", $options);
         } else {
-            $this->migrator->run($path, $pretend);
+            $this->migrator->run($path, $options);
         }
 
         // Once the migrator has run we will grab the note output and send it out to
