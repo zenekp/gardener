@@ -48,7 +48,7 @@ class SeedCommand extends Command {
             'pretend' => $this->input->getOption('pretend')
         ];
 
-        $path = database_path(config('smart-seeds.dir'));
+        $path = database_path(config('seeds.dir'));
         $env = $this->option('env');
 
         $this->migrator->setEnv($env);
