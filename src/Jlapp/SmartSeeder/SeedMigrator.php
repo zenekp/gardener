@@ -42,7 +42,7 @@ class SeedMigrator extends Migrator
      */
     public function getMigrationFiles($path)
     {
-        $files = array();
+        $files = [];
         if (! empty($this->repository->env)) {
             $files = array_merge($files, $this->files->glob("$path/{$this->repository->env}/*.php"));
         }
@@ -52,7 +52,7 @@ class SeedMigrator extends Migrator
         // extension and take the basename of the file which is all we need when
         // finding the migrations that haven't been run against the databases.
         if ($files === false) {
-            return array();
+            return [];
         }
 
         $files = array_map(function ($file) {
@@ -77,11 +77,11 @@ class SeedMigrator extends Migrator
      */
     public function runSingleFile($path, $pretend = false)
     {
-        $this->notes = array();
+        $this->notes = [];
 
         $file = str_replace('.php', '', basename($path));
 
-        $files = array($file);
+        $files = [$file];
 
         // Once we grab all of the migration files for the path, we will compare them
         // against the migrations that have already been run for this package then
@@ -113,7 +113,7 @@ class SeedMigrator extends Migrator
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
-        $fullPath  = $this->getAppNamespace().$file;
+        $fullPath = $this->getAppNamespace().$file;
         $migration = new $fullPath();
 
         if ($pretend) {

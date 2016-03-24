@@ -45,7 +45,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
      */
     public function __construct(Resolver $resolver, $table)
     {
-        $this->table    = $table;
+        $this->table = $table;
         $this->resolver = $resolver;
     }
 
@@ -104,7 +104,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
         if (empty($env)) {
             $env = App::environment();
         }
-        $record = array('seed' => $file, 'env' => $env, 'batch' => $batch);
+        $record = ['seed' => $file, 'env' => $env, 'batch' => $batch];
 
         $this->table()->insert($record);
     }

@@ -10,9 +10,9 @@ class Seeder extends Eloquent
      */
     protected $table = 'seeds';
 
-    protected $fillable = array(
+    protected $fillable = [
         'seed',
         'env',
-        'batch'
-    );
+        'batch',
+    ];
 }
