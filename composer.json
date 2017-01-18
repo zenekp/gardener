@@ -1,15 +1,15 @@
 {
 	"name": "zenekp/gardener",
-	"description": "Smart seeders for Laravel. created and developed by gizburdt",
+	"description": "Smart seeders for Laravel.",
 	"keywords": ["laravel", "seed", "database", "seeding", "table", "seeder", "smart"],
 	"type": "library",
 	"license": "MIT",
 	"require": {
 		"php": ">=5.4.0",
-		"illuminate/support": "5.3.*",
-		"illuminate/console": "5.3.*",
-		"illuminate/database": "5.3.*",
-		"illuminate/filesystem": "5.3.*"
+		"illuminate/support": "5.2.*",
+		"illuminate/console": "5.2.*",
+		"illuminate/database": "5.2.*",
+		"illuminate/filesystem": "5.2.*"
 	},
 	"require-dev": {
 		"phpspec/phpspec": "~2.0",
