@@ -21,9 +21,15 @@ class SmartSeederServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+		$this->loadViewsFrom(__DIR__.'/stubs', 'Seeds');
+		
         $this->publishes([
             __DIR__.'/../../config/seeds.php' => config_path('seeds.php'),
         ]);
+		
+        $this->publishes([
+            __DIR__ . '/stubs/' => resource_path('views/vendor/Seeds')
+        ], 'views');
     }
 
     /**
