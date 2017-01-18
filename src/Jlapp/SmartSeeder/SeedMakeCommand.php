@@ -37,7 +37,12 @@ class SeedMakeCommand extends Command
         $model = ucfirst($this->argument('model'));
         $path = $this->option('path');
         $env = $this->option('env');
-        $stub = File::get(__DIR__.'/stubs/DatabaseSeeder.stub');
+		
+		$filePath = config('seeds.stub', __DIR__.'/stubs/DatabaseSeeder.stub');
+		if ( ! $filePath ) {
+			$this->line($filePath . ' does not exist for stub');
+		}
+        $stub = File::get($filePath);
 
         // Check path
         if (empty($path)) {

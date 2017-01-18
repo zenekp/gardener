@@ -24,5 +24,4 @@ return [
     */
 
     'dir' => 'smart-seeds',
-
 ];
