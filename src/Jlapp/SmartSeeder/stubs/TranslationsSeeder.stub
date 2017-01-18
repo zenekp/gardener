@@ -1,0 +1,27 @@
+<?php
+
+{{namespace}}
+
+use Illuminate\Database\Eloquent\Model;
+use PML5Packages\Texts\BaseTranslationsSeeder;
+
+class {{model}} extends BaseTranslationsSeeder
+{
+    /**
+     *	protected $translations = [
+	 *		'key' => [
+	 *			'en-gb' => 'english translation here...',
+	 *			'fr-fr' => 'french translation here...',
+	 *		],
+	 *	];
+     */
+	protected $translations = [];
+	
+	/**
+	 * 	protected $forceTranslations = [
+	 *  	'key',
+	 * 		'key2',
+	 * 	];
+	 */
+	protected $forceTranslations = [];
+}
