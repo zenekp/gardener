@@ -3,10 +3,21 @@
 {{namespace}}
 
 use PML5Packages\CustomValidators\BaseCarrierValidationSeeder;
+use PML5Packages\CustomValidators\Models\ValidatableField;
 
 class {{model}} extends BaseCarrierValidationSeeder
 {
 	protected $carrierInternalRef = '';
+	
+	# protected $ruleValues = [
+	# 	ValidatableField::PROFILE_TYPE_COLLECTION_ADDRESS => [
+	# 		'recipient' => [
+	# 			'label' => 'Recipient',
+	# 			'description' => 'The name of the Sender',
+	# 			'source' => Address::class,
+	# 		],
+	# 	],
+	# ];
 	
 	protected $ruleValues = [];
 }
