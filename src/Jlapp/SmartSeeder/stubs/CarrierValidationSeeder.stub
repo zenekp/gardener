@@ -1,0 +1,12 @@
+<?php
+
+{{namespace}}
+
+use PML5Packages\CustomValidators\BaseCarrierValidationSeeder;
+
+class {{model}} extends BaseCarrierValidationSeeder
+{
+	protected $carrierInternalRef = '';
+	
+	protected $ruleValues = [];
+}
