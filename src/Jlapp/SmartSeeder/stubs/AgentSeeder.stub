@@ -223,37 +223,6 @@ class {{model}} extends BaseAgentsSeeder
 	 */
 	protected function getAgentProtectionCoverData()
 	{
-		return [
-			'GBP' => [
-				['min' => 0, 	 'max' => 2000, 'price' => 0],
-				['min' => 2000,  'max' => 10000, 'price' => 125],
-				['min' => 10000, 'max' => 12500, 'price' => 149],
-				['min' => 12500, 'max' => 15000, 'price' => 175],
-				['min' => 15000, 'max' => 17500, 'price' => 199],
-				['min' => 17500, 'max' => 20000, 'price' => 249],
-				['min' => 20000, 'max' => 22500, 'price' => 299],
-				['min' => 22500, 'max' => 25000, 'price' => 349],
-				['min' => 25000, 'max' => 27500, 'price' => 399],
-				['min' => 27500, 'max' => 30000, 'price' => 449],
-				['min' => 30000, 'max' => 32500, 'price' => 499],
-				['min' => 32500, 'max' => 35000, 'price' => 549],
-				['min' => 35000, 'max' => 37500, 'price' => 569],
-				['min' => 37500, 'max' => 40000, 'price' => 599],		
-				['min' => 40000, 'max' => 42500, 'price' => 675],		
-				['min' => 42500, 'max' => 45000, 'price' => 749],		
-				['min' => 45000, 'max' => 47500, 'price' => 825],		
-				['min' => 47500, 'max' => 50000, 'price' => 899],		
-				['min' => 50000, 'max' => 55000, 'price' => 999],		
-				['min' => 55000, 'max' => 60000, 'price' => 1099],		
-				['min' => 60000, 'max' => 65000, 'price' => 1199],		
-				['min' => 65000, 'max' => 70000, 'price' => 1299],		
-				['min' => 70000, 'max' => 75000, 'price' => 1425],		
-				['min' => 75000, 'max' => 80000, 'price' => 1549],		
-				['min' => 80000, 'max' => 85000, 'price' => 1699],		
-				['min' => 85000, 'max' => 90000, 'price' => 1799],		
-				['min' => 90000, 'max' => 95000, 'price' => 1899],		
-				['min' => 95000, 'max' => 100000, 'price' => 1999],		
-			],
-		];
+		return [];
 	}
 }
