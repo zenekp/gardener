@@ -1,0 +1,259 @@
+<?php
+
+{{namespace}}
+
+use PML5Packages\QuoteEngine\BaseAgentsSeeder;
+
+use PML5Packages\I18n\Models\Unit;
+use PML5Packages\I18n\Models\Locale;
+use PML5Packages\I18n\Models\Currency;
+use PML5Packages\I18n\Models\Country;
+use PML5Packages\QuoteEngine\Models\Agent;
+use PML5Packages\QuoteEngine\Models\Carrier;
+use PML5Packages\QuoteEngine\Models\Service;
+use PML5Packages\QuoteEngine\Models\ServiceTranslation;
+use PML5Packages\QuoteEngine\Models\ServiceRule;
+use PML5Packages\QuoteEngine\Models\ServiceValidator;
+use PML5Packages\QuoteEngine\Models\ServiceWeightModifier;
+use PML5Packages\QuoteEngine\Models\ServiceWeightModification;
+use PML5Packages\QuoteEngine\Models\ServiceTransitDuration;
+use PML5Packages\QuoteEngine\Models\Offer;
+use PML5Packages\Orders\Models\Address;
+use PML5Packages\Orders\Models\ProtectionCoverBand;
+
+class {{model}} extends BaseAgentsSeeder
+{
+	/**
+	 * Define the Agent
+	 *
+	 *	protected function getAgentData()
+	 *	{
+	 *		return [
+	 *			'trading_name' => 'Sold by Smiths News Trading Ltd trading as Pass My Parcel',
+	 *			'website' => 'www.smithsnews.co.uk',
+	 *			'phone' => '0845 125 5222',
+	 *			'email' => 'Customer.services@smithsnews.co.uk',
+	 *	        'logo' => null,
+	 *			'timezone' => 'Europe/London',
+	 *			'company_number' => '00237811',
+	 *			'tax_number' => 'GB 882 348 007',
+	 *			'default_shipping_tax_rate' => '20',
+	 *			'default_shipping_tax_type' => 'gb_vat',
+	 *			'api_connector_class_name' => null,
+	 *			'poll_for_tracking' => false,
+	 *			'prices_include_commission' => true,
+	 *			'domestic_fixed_commission' => 0,
+	 *			'domestic_percentage_commission' => 0,
+	 *			'international_fixed_commission' => 0,
+	 *			'international_percentage_commission' => 0,
+	 *			'commission_tax_rate' => 0,
+	 *			'commission_tax_type' => null,
+	 *			'maximum_free_protection_cover_value' => 2000,
+	 *			'maximum_protection_cover_value' => 100000,
+	 *			'protection_cover_fixed_commission' => 0,
+	 *			'protection_cover_percentage_commission' => 0,
+	 *			'protection_cover_commission_tax_rate' => 0,
+	 *			'protection_cover_commission_tax_type' => null,
+	 *			'currency_id' => Currency::findFromCode('GBP')->id,
+	 *			'unit_id' => Unit::findFromCode('metric')->id,
+	 *			'package_namespace' => 'PassMyParcel',
+	 *		];
+	 *	}
+	 *
+	 */
+	protected function getAgentData()
+	{
+		return [];
+	}
+	
+	/**
+	 * Define the Agent Address
+	 *
+	 *	protected function getAgentAddressData()
+	 *	{
+	 *		return [			
+	 *			'organisation' => 'Smiths News Trading Ltd',
+	 *			'address_line_1' => 'Rowan House Cherry Orchard North',
+	 *			'address_line_2' => 'Kembrey Park',
+	 *			'postal_code' => 'SN2 8UH',
+	 *			'locality' => 'Swindon',
+	 *			'administrative_area' => 'Wiltshire',
+	 *			'country_id' => Country::findFromCode('gb')->id,
+	 *		];
+	 *	}
+	 */
+	protected function getAgentAddressData()
+	{
+		return [];
+	}
+	
+	/**
+	 * Define the Agent's Services
+     *
+	 *	public function getAgentServicesData(Agent $agent)
+	 *	{
+	 *		return [
+	 *			[	
+	 *				'service' => [
+	 *					'internal_ref' => 'pass_my_parcel_international',
+	 *					'logo' => null,
+	 *					'agent_id' => $agent->id,
+	 *					'agent_source' => Offer::SOURCE_INTERNAL,
+	 *					'injection_type' => Service::INJECTION_TYPE_DROP_OFF,
+	 *					'delivery_type' => Service::DELIVERY_TYPE_TO_DOOR,
+	 *					'printer' => true,
+	 *					'insurable' => true,
+	 *					'label_type' => Service::LABEL_TYPE_PDF,
+	 *					'allowed_parcel_count' => 5,
+	 *			        'exclude_weekend_collections' => false,
+	 *					'exclude_public_holiday_collections' => false,
+	 *					'available_collection_days' => null,
+	 *					'collection_commencement' => null,
+	 *					'same_day_cut_off_time' => null,
+	 *					'collection_service_location_required' => true,
+	 *					'show_collection_service_locations' => true,
+	 *					'service_location_search_minimum_radius' => 1,
+	 *					'service_location_search_maximum_radius' => 50,
+	 *					'active' => true,
+	 *					'override_agent_commission' => false,
+	 *					'prices_include_commission' => true,
+	 *					'domestic_fixed_commission' => 0,
+	 *					'domestic_percentage_commission' => 0,
+	 *					'international_fixed_commission' => 0,
+	 *					'international_percentage_commission' => 0,
+	 *					'commission_tax_rate' => 0,
+	 *					'commission_tax_type' => null,
+	 *					'protection_cover_source' => Offer::SOURCE_INTERNAL,
+	 *					'protection_cover_supplier' => ProtectionCoverBand::SUPPLIER_AGENT,
+	 *					'override_agent_protection_cover' => false,
+	 *					'protection_cover_fixed_commission' => 0,
+	 *					'protection_cover_percentage_commission' => 0,
+	 *					'protection_cover_commission_tax_rate' => 0,
+	 *					'protection_cover_commission_tax_type' => null,
+	 *					'quote_filter_class_name' => null,
+	 *					'quote_adjuster_class_name' => null,
+	 *				],
+	 *				'translation' => [
+	 *					'locale_id' => Locale::findFromCode('en-gb')->id,
+	 *					'name' => 'PMP International',
+	 *					'description' => 'Content Managed Service Information',
+	 *					'collection_information' => 'Content Managed Collection Information',
+	 *					'drop_off_information' => '<p>Content Manged Drop Off Information</p>',
+	 *					'delivery_information' => 'Content Managed Delivery Information',
+	 *			        'addresses_information' => '<p>Content Manged Address Information</p>',
+	 *				    'protection_cover_information' => '<p>Content Manged Protection Cover Information</p>',
+	 *			        'declarations_information' => '<p>Content Manged Declarations Information</p>',
+	 *				    'confirmation_information' => '<p>Content Manged Confirmation Information</p>',
+	 *				],
+	 *				'rules' => [
+	 *					[
+	 *						'service_validator_id' => ServiceValidator::where('name', 'max length')->get()->first()->id,
+	 *						'unit_id' => Unit::findFromCode('metric')->id,
+	 *						'country_id' => null,
+	 *						'value' => 90,
+	 *					],
+	 *					[
+	 *						'service_validator_id' => ServiceValidator::where('name', 'max width')->get()->first()->id,
+	 *						'unit_id' => Unit::findFromCode('metric')->id,
+	 *						'country_id' => null,
+	 *						'value' => 60,
+	 *					],
+	 *					[
+	 *						'service_validator_id' => ServiceValidator::where('name', 'max height')->get()->first()->id,
+	 *						'unit_id' => Unit::findFromCode('metric')->id,
+	 *						'country_id' => null,
+	 *						'value' => 40,
+	 *					],
+	 *				],
+	 *				'modifiers' => [
+	 *					[
+	 *						'service_weight_modifier_id' => ServiceWeightModifier::where('name', 'volumetric')->get()->first()->id,
+	 *						'unit_id' => Unit::findFromCode('metric')->id,
+	 *						'country_id' => null,
+	 *						'value' => 5000,
+	 *					],
+	 *				],
+	 *				'durations' => [
+	 *					[		
+	 *						'country_code' => 'at',					
+	 *						'minimum' => 3,					
+	 *						'maximum' => 5,
+	 *					],
+	 *					[
+	 *						'country_code' => 'be',					
+	 *						'minimum' => 3,					
+	 *						'maximum' => 5,
+	 *					],
+	 *					//... more transit durations go here
+	 *				],
+	 *				'carriers' => [
+	 *					[
+	 *						'name' => 'TrakPak',
+	 *						'internal_ref' => Carrier::INTERNAL_REF_TRAKPAK,
+	 *					],
+	 *				],
+	 *			],
+	 *			//... more services go here
+	 *		];
+	 *	}
+	 */
+	public function getAgentServicesData(Agent $agent)
+	{
+		return [];
+	}
+	
+	/**
+	 * Define the Agents Protection Cover Bands
+	 *	
+	 *	protected function getAgentProtectionCoverData()
+	 *	{
+	 *		return [
+	 *			'GBP' => [
+	 *				['min' => 0, 	 'max' => 2000, 'price' => 0],
+	 *				['min' => 2000,  'max' => 10000, 'price' => 125],
+	 *				...
+	 *			],
+	 *			'EUR' => [
+	 *				['min' => 0, 	 'max' => 2000, 'price' => 0],
+	 *				['min' => 2000,  'max' => 10000, 'price' => 125],
+	 *				...
+	 *			],
+	 *		];
+	 *	}
+	 */
+	protected function getAgentProtectionCoverData()
+	{
+		return [
+			'GBP' => [
+				['min' => 0, 	 'max' => 2000, 'price' => 0],
+				['min' => 2000,  'max' => 10000, 'price' => 125],
+				['min' => 10000, 'max' => 12500, 'price' => 149],
+				['min' => 12500, 'max' => 15000, 'price' => 175],
+				['min' => 15000, 'max' => 17500, 'price' => 199],
+				['min' => 17500, 'max' => 20000, 'price' => 249],
+				['min' => 20000, 'max' => 22500, 'price' => 299],
+				['min' => 22500, 'max' => 25000, 'price' => 349],
+				['min' => 25000, 'max' => 27500, 'price' => 399],
+				['min' => 27500, 'max' => 30000, 'price' => 449],
+				['min' => 30000, 'max' => 32500, 'price' => 499],
+				['min' => 32500, 'max' => 35000, 'price' => 549],
+				['min' => 35000, 'max' => 37500, 'price' => 569],
+				['min' => 37500, 'max' => 40000, 'price' => 599],		
+				['min' => 40000, 'max' => 42500, 'price' => 675],		
+				['min' => 42500, 'max' => 45000, 'price' => 749],		
+				['min' => 45000, 'max' => 47500, 'price' => 825],		
+				['min' => 47500, 'max' => 50000, 'price' => 899],		
+				['min' => 50000, 'max' => 55000, 'price' => 999],		
+				['min' => 55000, 'max' => 60000, 'price' => 1099],		
+				['min' => 60000, 'max' => 65000, 'price' => 1199],		
+				['min' => 65000, 'max' => 70000, 'price' => 1299],		
+				['min' => 70000, 'max' => 75000, 'price' => 1425],		
+				['min' => 75000, 'max' => 80000, 'price' => 1549],		
+				['min' => 80000, 'max' => 85000, 'price' => 1699],		
+				['min' => 85000, 'max' => 90000, 'price' => 1799],		
+				['min' => 90000, 'max' => 95000, 'price' => 1899],		
+				['min' => 95000, 'max' => 100000, 'price' => 1999],		
+			],
+		];
+	}
+}
