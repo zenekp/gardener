@@ -4,6 +4,7 @@
 
 use PML5Packages\CustomValidators\BaseCarrierValidationSeeder;
 use PML5Packages\CustomValidators\Models\ValidatableField;
+use PML5Packages\QuoteEngine\Models\Carrier;
 
 class {{model}} extends BaseCarrierValidationSeeder
 {
