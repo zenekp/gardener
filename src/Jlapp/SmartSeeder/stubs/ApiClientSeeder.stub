@@ -1,0 +1,18 @@
+<?php
+
+{{namespace}}
+
+use PML5Packages\OAuthAPI\BaseApiClientSeeder;
+
+class {{model}} extends BaseApiClientSeeder
+{
+	/**
+	 * Used to find the agent you want to create the oauth client for, and the scope IDs to attach
+	 * @var array
+	 */
+	protected $agentNamespacesAndScopeIds = [
+		'AgentNamespace' => [
+			'scope',
+		],
+	];
+}
