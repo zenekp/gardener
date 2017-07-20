@@ -9,7 +9,11 @@ class {{model}} extends BaseApiScopesSeeder
     /**
      *	protected $scopes = [
 	 *		'scopeName' => [
-	 *			'apiClientName',
+	 *			'description' => 'A Description of the Scope....',
+	 *			'clients' => [
+	 *				'clientName1',
+	 *				'clientName2',
+	 *			],
 	 *		],
 	 *	];
      */
