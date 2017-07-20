@@ -1,0 +1,19 @@
+<?php
+
+{{namespace}}
+
+use Illuminate\Database\Eloquent\Model;
+use PML5Packages\Cruddy\BaseCruddyPermissionsSeeder;
+
+class {{model}} extends BaseCruddyPermissionsSeeder
+{
+    /**
+     *	protected $entities = [
+	 *		'entity' => [
+	 *			'create',
+     *       	'read' => ['role1', role2],
+	 *		],
+	 *	];
+     */
+	protected $entities = [];
+}

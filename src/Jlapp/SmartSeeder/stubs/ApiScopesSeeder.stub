@@ -1,0 +1,18 @@
+<?php
+
+{{namespace}}
+
+use Illuminate\Database\Eloquent\Model;
+use PML5Packages\Cruddy\BaseCruddyPermissionsSeeder;
+
+class {{model}} extends BaseCruddyPermissionsSeeder
+{
+    /**
+     *	protected $scopes = [
+	 *		'scopeName' => [
+	 *			'apiClientName',
+	 *		],
+	 *	];
+     */
+	protected $scopes = [];
+}
