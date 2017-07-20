@@ -3,9 +3,9 @@
 {{namespace}}
 
 use Illuminate\Database\Eloquent\Model;
-use PML5Packages\Cruddy\BaseCruddyPermissionsSeeder;
+use PML5Packages\OAuthAPI\BaseApiScopesSeeder;
 
-class {{model}} extends BaseCruddyPermissionsSeeder
+class {{model}} extends BaseApiScopesSeeder
 {
     /**
      *	protected $scopes = [
