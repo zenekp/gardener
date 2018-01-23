@@ -1,0 +1,13 @@
+<?php
+
+{{namespace}}
+
+use PML5Packages\QuoteEngine\BaseCarriersSeeder;
+
+class {{model}} extends BaseCarriersSeeder
+{
+	protected function getCarrierData()
+	{
+		return [];
+	}
+}
