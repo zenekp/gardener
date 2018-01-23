@@ -28,7 +28,7 @@ class {{model}} extends BaseAgentsSeeder
 	{
 		return [];
 	}
-	
+
 	protected function getAgentAddressData()
 	{
 		return [];
