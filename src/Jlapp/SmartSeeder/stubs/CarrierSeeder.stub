@@ -2,6 +2,7 @@
 
 {{namespace}}
 
+use PML5Packages\QuoteEngine\Models\Carrier;
 use PML5Packages\QuoteEngine\BaseCarriersSeeder;
 
 class {{model}} extends BaseCarriersSeeder
