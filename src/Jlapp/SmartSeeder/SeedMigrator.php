@@ -139,7 +139,7 @@ class SeedMigrator extends Migrator
      * @param  bool   $pretend
      * @return void
      */
-    protected function runDown($seed, $pretend)
+    protected function runDown($seed, $migration, $pretend)
     {
         $file = $seed->seed;
 

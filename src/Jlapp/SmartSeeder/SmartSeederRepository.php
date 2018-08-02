@@ -228,4 +228,9 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     {
         $this->connection = $name;
     }
+	
+    public function getMigrations($steps)
+    {
+        return;
+    }
 }
