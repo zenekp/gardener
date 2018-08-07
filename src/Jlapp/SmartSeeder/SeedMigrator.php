@@ -108,10 +108,12 @@ class SeedMigrator extends Migrator
      */
     protected function runUp($file, $batch, $pretend)
     {
+		$file = str_replace('.php', '', basename($file));
+		
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
-        $fullPath = $this->getAppNamespace().str_replace('.php', '', basename($file));
+        $fullPath = $this->getAppNamespace().$file;
         $migration = new $fullPath();
 
         if ($pretend) {
