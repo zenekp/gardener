@@ -60,10 +60,6 @@ class SeedMigrator extends Migrator
             return [];
         }
 
-        $files = array_map(function ($file) {
-            return str_replace('.php', '', basename($file));
-        }, $files);
-
         // Once we have all of the formatted file names we will sort them and since
         // they all start with a timestamp this should give us the migrations in
         // the order they were actually created by the application developers.
@@ -115,7 +111,7 @@ class SeedMigrator extends Migrator
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
-        $fullPath = $this->getAppNamespace().$file;
+        $fullPath = $this->getAppNamespace().str_replace('.php', '', basename($file));
         $migration = new $fullPath();
 
         if ($pretend) {
