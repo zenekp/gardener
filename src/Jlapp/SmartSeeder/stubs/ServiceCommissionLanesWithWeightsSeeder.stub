@@ -1,0 +1,19 @@
+<?php
+
+{{namespace}}
+
+use PML5Packages\I18n\Models\Unit;
+use PML5Packages\QuoteEngine\BaseServiceCommissionLanesWithWeightsSeeder;
+
+class {{model}} extends BaseServiceCommissionLanesWithWeightsSeeder
+{
+    /**
+     * @var string
+     */
+    protected $serviceInternalRef = '';
+
+    /**
+     * @var array
+     */
+    protected $shippingLaneCommissions = [];
+}
