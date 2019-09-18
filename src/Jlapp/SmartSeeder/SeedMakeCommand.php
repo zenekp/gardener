@@ -32,7 +32,7 @@ class SeedMakeCommand extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $model = ucfirst($this->argument('model'));
         $path = $this->option('path');
