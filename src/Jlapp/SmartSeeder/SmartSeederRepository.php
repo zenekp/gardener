@@ -233,4 +233,9 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     {
         return;
     }
+
+    public function getMigrationBatches()
+    {
+        return;
+    }
 }
