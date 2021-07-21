@@ -5,15 +5,12 @@ namespace Jlapp\SmartSeeder;
 use App;
 use Config;
 use File;
-use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
 
 class SeedMigrator extends Migrator
 {
-    use DetectsApplicationNamespace;
-
     /**
      * Create a new migrator instance.
      *
@@ -128,6 +125,11 @@ class SeedMigrator extends Migrator
         $this->repository->log($file, $batch);
 
         $this->note("<info>Seeded:</info> $file");
+    }
+
+    protected function getAppNamespace()
+    {
+        return Container::getInstance()->getNamespace();
     }
 
     /**
