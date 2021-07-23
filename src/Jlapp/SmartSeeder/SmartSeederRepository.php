@@ -238,4 +238,14 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     {
         return;
     }
+
+    /**
+     * Delete the migration repository data store.
+     *
+     * @return void
+     */
+    public function deleteRepository()
+    {
+        return;
+    }
 }
