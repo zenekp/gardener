@@ -129,7 +129,7 @@ class SeedMigrator extends Migrator
 
     protected function getAppNamespace()
     {
-        return Container::getInstance()->getNamespace();
+        return App::getNamespace();
     }
 
     /**
