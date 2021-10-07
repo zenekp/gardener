@@ -1,0 +1,23 @@
+<?php
+
+{{namespace}}
+
+use App\ParcelMonkey\Orders\BaseCountryProhibitedItemsSeeder;
+
+class {{model}} extends BaseCountryProhibitedItemsSeeder
+{
+	protected $countryCode = '';
+	
+	# protected $$prohibitedItems = [
+	# 	'hs-code' => [
+	#   	'locale-code' => [
+	#   		'vernacular_description' => '...',
+    #            'synonyms' => [
+    #                '...',
+	#                '...',
+    #            ],
+	#		],
+	#	],
+	# ];
+	protected $prohibitedItems = [];
+}

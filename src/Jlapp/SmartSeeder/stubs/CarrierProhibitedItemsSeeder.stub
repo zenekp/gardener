@@ -1,0 +1,23 @@
+<?php
+
+{{namespace}}
+
+use App\ParcelMonkey\Orders\BaseCarrierProhibitedItemsSeeder;
+
+class {{model}} extends BaseCarrierProhibitedItemsSeeder
+{
+	protected $carrierInternalReference = '';
+	
+	# protected $$prohibitedItems = [
+	# 	'hs-code' => [
+	#   	'locale-code' => [
+	#   		'vernacular_description' => '...',
+    #            'synonyms' => [
+    #                '...',
+	#                '...',
+    #            ],
+	#		],
+	#	],
+	# ];
+	protected $prohibitedItems = [];
+}

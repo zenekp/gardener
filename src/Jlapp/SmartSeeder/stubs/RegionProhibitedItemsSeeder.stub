@@ -1,0 +1,23 @@
+<?php
+
+{{namespace}}
+
+use App\ParcelMonkey\Orders\BaseRegionProhibitedItemsSeeder;
+
+class {{model}} extends BaseRegionProhibitedItemsSeeder
+{
+	protected $regionLabel = '';
+	
+	# protected $$prohibitedItems = [
+	# 	'hs-code' => [
+	#   	'locale-code' => [
+	#   		'vernacular_description' => '...',
+    #            'synonyms' => [
+    #                '...',
+	#                '...',
+    #            ],
+	#		],
+	#	],
+	# ];
+	protected $prohibitedItems = [];
+}

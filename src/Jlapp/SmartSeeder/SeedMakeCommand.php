@@ -4,15 +4,12 @@ namespace Jlapp\SmartSeeder;
 
 use Config;
 use File;
-use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 class SeedMakeCommand extends Command
 {
-    use AppNamespaceDetectorTrait;
-
     /**
      * The console command name.
      *
@@ -32,7 +29,7 @@ class SeedMakeCommand extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $model = ucfirst($this->argument('model'));
         $path = $this->option('path');
@@ -81,6 +78,11 @@ class SeedMakeCommand extends Command
         }
 
         $this->line($message);
+    }
+
+    protected function getAppNamespace()
+    {
+        return Container::getInstance()->getNamespace();
     }
 
     /**
