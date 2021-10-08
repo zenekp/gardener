@@ -5,15 +5,12 @@ namespace Jlapp\SmartSeeder;
 use App;
 use Config;
 use File;
-use Illuminate\Console\AppNamespaceDetectorTrait;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
 
 class SeedMigrator extends Migrator
 {
-    use AppNamespaceDetectorTrait;
-
     /**
      * Create a new migrator instance.
      *
@@ -59,10 +56,6 @@ class SeedMigrator extends Migrator
         if ($files === false) {
             return [];
         }
-
-        $files = array_map(function ($file) {
-            return str_replace('.php', '', basename($file));
-        }, $files);
 
         // Once we have all of the formatted file names we will sort them and since
         // they all start with a timestamp this should give us the migrations in
@@ -112,6 +105,8 @@ class SeedMigrator extends Migrator
      */
     protected function runUp($file, $batch, $pretend)
     {
+		$file = str_replace('.php', '', basename($file));
+		
         // First we will resolve a "real" instance of the migration class from this
         // migration file name. Once we have the instances we can run the actual
         // command such as "up" or "down", or we can just simulate the action.
@@ -130,6 +125,11 @@ class SeedMigrator extends Migrator
         $this->repository->log($file, $batch);
 
         $this->note("<info>Seeded:</info> $file");
+    }
+
+    protected function getAppNamespace()
+    {
+        return App::getNamespace();
     }
 
     /**

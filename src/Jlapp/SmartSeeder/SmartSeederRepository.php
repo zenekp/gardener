@@ -72,7 +72,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             $env = App::environment();
         }
 
-        return $this->table()->where('env', '=', $env)->pluck('seed');
+        return $this->table()->where('env', '=', $env)->pluck('seed')->all();
     }
 
     /**
@@ -228,8 +228,23 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     {
         $this->connection = $name;
     }
-	
+
     public function getMigrations($steps)
+    {
+        return;
+    }
+
+    public function getMigrationBatches()
+    {
+        return;
+    }
+
+    /**
+     * Delete the migration repository data store.
+     *
+     * @return void
+     */
+    public function deleteRepository()
     {
         return;
     }

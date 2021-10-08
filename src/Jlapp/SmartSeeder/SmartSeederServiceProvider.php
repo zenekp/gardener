@@ -3,17 +3,11 @@
 namespace Jlapp\SmartSeeder;
 
 use App;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class SmartSeederServiceProvider extends ServiceProvider
+class SmartSeederServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Boot.
      *

@@ -2,7 +2,7 @@
 
 {{namespace}}
 
-use PML5Packages\OAuthAPI\BaseApiScopesSeeder;
+use App\Seeders\BaseApiScopesSeeder;
 
 class {{model}} extends BaseApiScopesSeeder
 {

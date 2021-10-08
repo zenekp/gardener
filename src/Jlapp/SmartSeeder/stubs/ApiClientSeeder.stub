@@ -2,7 +2,7 @@
 
 {{namespace}}
 
-use PML5Packages\OAuthAPI\BaseApiClientSeeder;
+use App\Seeders\BaseApiClientSeeder;
 
 class {{model}} extends BaseApiClientSeeder
 {
