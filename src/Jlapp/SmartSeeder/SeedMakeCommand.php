@@ -5,6 +5,7 @@ namespace Jlapp\SmartSeeder;
 use Config;
 use File;
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
