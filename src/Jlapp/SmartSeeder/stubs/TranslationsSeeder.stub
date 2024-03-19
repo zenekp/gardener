@@ -15,7 +15,16 @@ class {{model}} extends BaseTranslationsSeeder
 	 *		],
 	 *	];
      */
-	protected $translations = [];
+	protected $translations = [
+	    'key' => [
+	        'en-gb' => '',
+	        'fr-fr' => '',
+	        'de-de' => '',
+	        'it-it' => '',
+	        'es-es' => '',
+	        'nl-nl' => '',
+	    ],
+	];
 	
 	/**
 	 * 	protected $forceTranslations = [
