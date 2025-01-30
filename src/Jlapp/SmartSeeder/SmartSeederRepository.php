@@ -3,8 +3,10 @@
 namespace Jlapp\SmartSeeder;
 
 use App;
+use Illuminate\Database\Connection;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\MigrationRepositoryInterface;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Schema\Blueprint;
 
 class SmartSeederRepository implements MigrationRepositoryInterface
@@ -12,7 +14,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     /**
      * The database connection resolver instance.
      *
-     * @var \Illuminate\Database\ConnectionResolverInterface
+     * @var Resolver
      */
     protected $resolver;
 
@@ -40,7 +42,7 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     /**
      * Create a new database migration repository instance.
      *
-     * @param \Illuminate\Database\ConnectionResolverInterface $resolver
+     * @param Resolver $resolver
      * @param string                                           $table
      */
     public function __construct(Resolver $resolver, $table)
@@ -72,7 +74,32 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             $env = App::environment();
         }
 
-        return $this->table()->where('env', '=', $env)->pluck('seed')->all();
+        return $this->table()
+            ->where('env', '=', $env)
+            ->pluck('seed')
+            ->all();
+    }
+
+    /**
+     * Get the list of migrations.
+     *
+     * @param  int  $steps
+     * @return array
+     */
+    public function getMigrations($steps)
+    {
+        return [];
+    }
+
+    /**
+     * Get the list of the migrations by batch.
+     *
+     * @param  int  $batch
+     * @return array
+     */
+    public function getMigrationsByBatch($batch)
+    {
+        return [];
     }
 
     /**
@@ -88,9 +115,22 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             $env = App::environment();
         }
 
-        $query = $this->table()->where('env', '=', $env)->where('batch', $this->getLastBatchNumber());
+        return $this->table()
+            ->where('env', '=', $env)
+            ->where('batch', $this->getLastBatchNumber())
+            ->orderBy('seed', 'desc')
+            ->get()
+            ->toArray();
+    }
 
-        return $query->orderBy('seed', 'desc')->get();
+    /**
+     * Get the completed migrations with their batch numbers.
+     *
+     * @return array
+     */
+    public function getMigrationBatches()
+    {
+        return [];
     }
 
     /**
@@ -108,19 +148,20 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             $env = App::environment();
         }
 
-        $record = ['seed' => $file, 'env' => $env, 'batch' => $batch];
-
-        $this->table()->insert($record);
+        $this->table()->insert([
+            'seed' => $file,
+            'env' => $env,
+            'batch' => $batch,
+        ]);
     }
 
     /**
      * Remove a migration from the log.
      *
-     * @param $seed
-     *
-     * @internal param object $migration
+     * @param  object  $migration
+     * @return void
      */
-    public function delete($seed)
+    public function delete($migration)
     {
         $env = $this->env;
 
@@ -128,7 +169,10 @@ class SmartSeederRepository implements MigrationRepositoryInterface
             $env = App::environment();
         }
 
-        $this->table()->where('env', '=', $env)->where('seed', $seed->seed)->delete();
+        $this->table()
+            ->where('env', '=', $env)
+            ->where('seed', $migration->seed)
+            ->delete();
     }
 
     /**
@@ -139,22 +183,6 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function getNextBatchNumber()
     {
         return $this->getLastBatchNumber() + 1;
-    }
-
-    /**
-     * Get the last migration batch number.
-     *
-     * @return int
-     */
-    public function getLastBatchNumber()
-    {
-        $env = $this->env;
-
-        if (empty($env)) {
-            $env = App::environment();
-        }
-
-        return $this->table()->where('env', '=', $env)->max('batch');
     }
 
     /**
@@ -184,38 +212,17 @@ class SmartSeederRepository implements MigrationRepositoryInterface
     public function repositoryExists()
     {
         $schema = $this->getConnection()->getSchemaBuilder();
-
         return $schema->hasTable($this->table);
     }
 
     /**
-     * Get a query builder for the migration table.
+     * Delete the migration repository data store.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return void
      */
-    protected function table()
+    public function deleteRepository()
     {
-        return $this->getConnection()->table($this->table);
-    }
-
-    /**
-     * Get the connection resolver instance.
-     *
-     * @return \Illuminate\Database\ConnectionResolverInterface
-     */
-    public function getConnectionResolver()
-    {
-        return $this->resolver;
-    }
-
-    /**
-     * Resolve the database connection instance.
-     *
-     * @return \Illuminate\Database\Connection
-     */
-    public function getConnection()
-    {
-        return $this->resolver->connection($this->connection);
+        return;
     }
 
     /**
@@ -229,23 +236,49 @@ class SmartSeederRepository implements MigrationRepositoryInterface
         $this->connection = $name;
     }
 
-    public function getMigrations($steps)
+    /**
+     * Get the last migration batch number.
+     *
+     * @return int
+     */
+    public function getLastBatchNumber()
     {
-        return;
-    }
+        $env = $this->env;
 
-    public function getMigrationBatches()
-    {
-        return;
+        if (empty($env)) {
+            $env = App::environment();
+        }
+
+        return $this->table()->where('env', '=', $env)->max('batch');
     }
 
     /**
-     * Delete the migration repository data store.
+     * Get a query builder for the migration table.
      *
-     * @return void
+     * @return Builder
      */
-    public function deleteRepository()
+    protected function table()
     {
-        return;
+        return $this->getConnection()->table($this->table);
+    }
+
+    /**
+     * Get the connection resolver instance.
+     *
+     * @return Resolver
+     */
+    public function getConnectionResolver()
+    {
+        return $this->resolver;
+    }
+
+    /**
+     * Resolve the database connection instance.
+     *
+     * @return Connection
+     */
+    public function getConnection()
+    {
+        return $this->resolver->connection($this->connection);
     }
 }

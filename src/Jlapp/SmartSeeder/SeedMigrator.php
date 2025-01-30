@@ -3,8 +3,8 @@
 namespace Jlapp\SmartSeeder;
 
 use App;
-use Config;
 use File;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\ConnectionResolverInterface as Resolver;
 use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Filesystem\Filesystem;
@@ -14,13 +14,15 @@ class SeedMigrator extends Migrator
     /**
      * Create a new migrator instance.
      *
-     * @param  \Illuminate\Database\Migrations\MigrationRepositoryInterface $repository
-     * @param  \Illuminate\Database\ConnectionResolverInterface             $resolver
-     * @param  \Illuminate\Filesystem\Filesystem                            $files
-     * @return void
+     * @param SmartSeederRepository $repository
+     * @param Resolver $resolver
+     * @param Filesystem $files
      */
-    public function __construct(SmartSeederRepository $repository, Resolver $resolver, Filesystem $files)
-    {
+    public function __construct(
+        SmartSeederRepository $repository,
+        Resolver $resolver,
+        Filesystem $files
+    ) {
         parent::__construct($repository, $resolver, $files);
     }
 
@@ -68,9 +70,9 @@ class SeedMigrator extends Migrator
     /**
      * Run the outstanding migrations at a given path.
      *
-     * @param  string $path
-     * @param  bool   $pretend
-     * @return void
+     * @param $path
+     * @param false $pretend
+     * @throws FileNotFoundException
      */
     public function runSingleFile($path, $pretend = false)
     {
@@ -95,13 +97,13 @@ class SeedMigrator extends Migrator
         $this->runMigrationList($migrations, $pretend);
     }
 
+
     /**
      * Run "up" a migration instance.
      *
-     * @param  string $file
-     * @param  int    $batch
-     * @param  bool   $pretend
-     * @return void
+     * @param string $file
+     * @param int $batch
+     * @param bool $pretend
      */
     protected function runUp($file, $batch, $pretend)
     {
@@ -124,7 +126,7 @@ class SeedMigrator extends Migrator
         // in the application. A migration repository keeps the migrate order.
         $this->repository->log($file, $batch);
 
-        $this->note("<info>Seeded:</info> $file");
+        $this->write("<info>Seeded:</info> $file");
     }
 
     protected function getAppNamespace()
@@ -135,9 +137,9 @@ class SeedMigrator extends Migrator
     /**
      * Run "down" a migration instance.
      *
-     * @param  object $seed
-     * @param  bool   $pretend
-     * @return void
+     * @param string $seed
+     * @param object $migration
+     * @param bool $pretend
      */
     protected function runDown($seed, $migration, $pretend)
     {
@@ -161,7 +163,7 @@ class SeedMigrator extends Migrator
         // by the application then will be able to fire by any later operation.
         $this->repository->delete($seed);
 
-        $this->note("<info>Rolled back:</info> $file");
+        $this->write("<info>Rolled back:</info> $file");
     }
 
     /**
